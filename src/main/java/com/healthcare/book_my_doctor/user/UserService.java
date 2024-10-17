@@ -86,42 +86,42 @@ public class UserService {
 //	 														Helper methods
 
 	// Role check methods
-	private boolean isAdmin(UserDTO user) {
+	public boolean isAdmin(UserDTO user) {
 		return user.getUserRole() == UserRole.ADMIN;
 	}
 
-	private boolean isReceptionist(UserDTO user) {
+	public boolean isReceptionist(UserDTO user) {
 		return user.getUserRole() == UserRole.RECEPTIONIST;
 	}
 
-	private boolean isDoctor(UserDTO user) {
+	public boolean isDoctor(UserDTO user) {
 		return user.getUserRole() == UserRole.DOCTOR; // Assuming DOCTOR is a role in UserRole enum
 	}
 
-	private boolean isPatient(UserDTO user) {
+	public boolean isPatient(UserDTO user) {
 		return user.getUserRole() == UserRole.PATIENT; // Assuming PATIENT is a role in UserRole enum
 	}
 
 	// Modified authorization checks
-	private void checkAdminOrReceptionistAccess(UserDTO currentUser) {
+	public void checkAdminOrReceptionistAccess(UserDTO currentUser) {
 		if (!isAdmin(currentUser) && !isReceptionist(currentUser)) {
 			throw new UnauthorizedAccessException("You are not authorized to access this endpoint.");
 		}
 	}
 
-	private void checkUpdateAuthorization(UserDTO currentUser, UserDTO existingUser) {
+	public void checkUpdateAuthorization(UserDTO currentUser, UserDTO existingUser) {
 		if (!isAdmin(currentUser) && !isCurrentUser(currentUser, existingUser)) {
 			throw new UnauthorizedAccessException("You are not authorized to update this user.");
 		}
 	}
 
-	private void checkDeleteAuthorization(UserDTO currentUser, UserDTO userToDelete) {
+	public void checkDeleteAuthorization(UserDTO currentUser, UserDTO userToDelete) {
 		if (!isCurrentUser(currentUser, userToDelete) && !isAdmin(currentUser)) {
 			throw new UnauthorizedAccessException("You do not have permission to delete this user.");
 		}
 	}
 
-	private boolean isCurrentUser(UserDTO currentUser, UserDTO user) {
+	public boolean isCurrentUser(UserDTO currentUser, UserDTO user) {
 		return user.getUserUuid().equals(currentUser.getUserUuid());
 	}
 

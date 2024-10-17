@@ -31,7 +31,14 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
 	}
 
-	// Handle other exceptions similarly
+	@ExceptionHandler(AppointmentNotFoundException.class)
+	public final ResponseEntity<ResponseEnvelope> handleAppointmentNotFoundException(
+			AppointmentNotFoundException exception, WebRequest request) {
+		ResponseEnvelope response = ResponseEnvelope.builder().status(ResponseStatus.ERROR)
+				.message(exception.getMessage()).error("Appointment does not exist.").timeStamp(LocalDateTime.now())
+				.build();
+		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+	}
 
 	@ExceptionHandler(UnauthorizedAccessException.class)
 	public ResponseEntity<ResponseEnvelope> handleUnauthorizedException(UnauthorizedAccessException ex,
