@@ -15,7 +15,7 @@ import com.healthcare.book_my_doctor.enums.UserRole;
 
 public interface UserRepository extends JpaRepository<UserDTO, String> {
 
-	@Query("SELECT u FROM User2DTO u WHERE " + "(:userName IS NULL OR u.userName LIKE %:userName%) AND "
+	@Query("SELECT u FROM UserDTO u WHERE " + "(:userName IS NULL OR u.userName LIKE %:userName%) AND "
 			+ "(:userRealName IS NULL OR u.userRealName LIKE %:userRealName%) AND "
 			+ "(:userEmail IS NULL OR u.userEmail LIKE %:userEmail%) AND "
 			+ "(:userGender IS NULL OR u.userGender = :userGender) AND "

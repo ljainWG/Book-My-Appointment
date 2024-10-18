@@ -13,7 +13,7 @@ import com.healthcare.book_my_doctor.enums.AppointmentTimeSlot;
 
 public interface AppointmentRepository extends JpaRepository<AppointmentDTO, String> {
 
-	@Query("SELECT a FROM AppointmentDTO2 a " + "WHERE (:doctorId IS NULL OR a.doctorUuid = :doctorId) "
+	@Query("SELECT a FROM AppointmentDTO a " + "WHERE (:doctorId IS NULL OR a.doctorUuid = :doctorId) "
 			+ "AND (:patientId IS NULL OR a.patientUuid = :patientId) "
 			+ "AND (:status IS NULL OR a.appointmentStatus = :status) "
 			+ "AND (:scheduledDate IS NULL OR a.appointmentScheduledDate = :scheduledDate) "

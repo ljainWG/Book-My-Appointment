@@ -31,7 +31,7 @@ public class AppointmentController {
         this.appointmentService = appointmentService;
     }
 
-    @GetMapping("/v2/appointments")
+    @GetMapping("/appointments")
     public ResponseEntity<ResponseEnvelope> getAllAppointments(
             @RequestParam(required = false) String doctorId,
             @RequestParam(required = false) String patientId,
@@ -58,13 +58,13 @@ public class AppointmentController {
         return ResponseEntity.ok(response);
     }
     
-    @PostMapping("/v2/appointments")
+    @PostMapping("/appointments")
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody CreationAppointmentDTO creationAppointmentDTO) {
         AppointmentDTO createdAppointment = appointmentService.createAppointment(creationAppointmentDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAppointment);
     }
     
-    @GetMapping("/v2/user/{userId}/appointments")
+    @GetMapping("/user/{userId}/appointments")
     public ResponseEntity<ResponseEnvelope> getUserAppointments(
             @PathVariable String userId,
             @RequestParam(defaultValue = "0") int page,
@@ -74,7 +74,7 @@ public class AppointmentController {
         return ResponseEntity.ok(response);
     }
     
-    @PatchMapping("/v2/appointment/{appointmentId}")
+    @PatchMapping("/appointment/{appointmentId}")
     public ResponseEntity<ResponseEnvelope> updateAppointmentStatus(
             @PathVariable String appointmentId,
             @RequestBody UpdateAppointmentStatusDTO statusUpdateDTO) { // Assuming you have a DTO for the status update
@@ -83,7 +83,7 @@ public class AppointmentController {
         return ResponseEntity.ok(response);
     }
     
-    @DeleteMapping("/v2/appointment/{appointmentId}")
+    @DeleteMapping("/appointment/{appointmentId}")
     public ResponseEntity<String> deleteAppointment(@PathVariable String appointmentId) {
         appointmentService.deleteAppointment(appointmentId);
         return ResponseEntity.ok("Appointment deleted successfully.");

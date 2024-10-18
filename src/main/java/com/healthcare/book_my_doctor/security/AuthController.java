@@ -25,7 +25,6 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/auth")
 public class AuthController {
 
 	private final UserDetailsService userDetailsService;
@@ -51,7 +50,7 @@ public class AuthController {
 		return ResponseEntity.ok(envelope);
 	}
 
-	@PostMapping("/user/logout")
+	@PostMapping("/logout")
 	public ResponseEntity<ResponseEnvelope> logoutUser(@RequestHeader("Authorization") String authorizationHeader) {
 		// Check if the header is present and well-formed
 		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {

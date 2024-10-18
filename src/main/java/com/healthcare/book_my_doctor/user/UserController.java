@@ -30,7 +30,7 @@ public class UserController {
 	@Autowired
 	private UserService user2Service;
 
-	@GetMapping("/v2/users")
+	@GetMapping("/users")
 	public ResponseEnvelope getAllUsers(@RequestParam(required = false) String userName,
 			@RequestParam(required = false) String userRealName, @RequestParam(required = false) String userEmail,
 			@RequestParam(required = false) UserGender userGender, @RequestParam(required = false) UserRole userRole,
@@ -48,7 +48,7 @@ public class UserController {
 				.recordsPerPage(usersPage.getSize()).timeStamp(LocalDateTime.now()).build();
 	}
 
-	@PostMapping("/api/auth/v2/users")
+	@PostMapping("/api/auth/users")
 	public ResponseEntity<ResponseEnvelope> createUser(@RequestBody CreateUserDTO createUser2DTO) {
 
 		ResponseEnvelope response = user2Service.createUser(createUser2DTO);
@@ -63,7 +63,7 @@ public class UserController {
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
 
-	@PatchMapping("/v2/user/{userId}")
+	@PatchMapping("/user/{userId}")
 	public ResponseEntity<ResponseEnvelope> updateUser(@PathVariable String userId,
 			@RequestBody UpdateUserDTO updateUser2DTO) {
 
@@ -72,7 +72,7 @@ public class UserController {
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/v2/user/{userId}")
+	@DeleteMapping("/user/{userId}")
 	public ResponseEntity<ResponseEnvelope> deleteUser(@PathVariable String userId) {
 
 		user2Service.deleteUserById(userId);

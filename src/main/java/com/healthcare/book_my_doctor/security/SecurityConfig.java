@@ -26,11 +26,12 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable()).authorizeHttpRequests((authorize) -> {
-			authorize.requestMatchers("/api/auth/**").permitAll();
+			authorize.requestMatchers("/login").permitAll();
+			authorize.requestMatchers("/swagger-ui.html").permitAll();
+			authorize.requestMatchers("/swagger-ui/**").permitAll();
+			authorize.requestMatchers("/v3/api-docs/**").permitAll();
+			authorize.requestMatchers("/v3/api-docs.yaml").permitAll();
 			authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
-			authorize.requestMatchers("/swagger-ui/index.html**").permitAll();
-			authorize.requestMatchers("/v3/api-docs**").permitAll();
-			authorize.requestMatchers("/v3/api-docs.yaml**").permitAll();
 			authorize.anyRequest().authenticated();
 		}).httpBasic(Customizer.withDefaults());
 
